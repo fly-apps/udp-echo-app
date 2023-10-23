@@ -1,0 +1,17 @@
+app = "echo"
+primary_region = "ord"
+
+[build]
+image = "alpine:latest"
+
+[processes]
+app = "nc -lk -u -p 1235 -s fly-global-services -e /bin/cat" 
+
+[[services]]
+internal_port = 1235
+protocol = "udp"
+processes = ["app"]
+
+[[services.ports]]
+port = 1235
+handlers = []
